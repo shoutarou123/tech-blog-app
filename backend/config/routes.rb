@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :posts, only: [:index]
+    end
+    namespace :v2 do
+      resources :items, only: [:index] do
+        collection do
+          get :all
+        end
+      end
+    end
+  end
   get '/hello', to: 'hello#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
