@@ -5,12 +5,14 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3003",
     "lint": "next lint",
     "test": "jest",
     "json-server": "json-server --watch src/data/posts.json --port 3005"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.77.2",
+    "@tanstack/react-query-devtools": "^5.77.2",
     "json-server": "^1.0.0-beta.3",
     "next": "15.1.8",
     "react": "^19.0.0",
@@ -19,6 +21,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.7",
+    "@tanstack/eslint-plugin-query": "^5.78.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",

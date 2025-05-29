@@ -1,4 +1,5 @@
 import "./globals.css";
+import QueryClientProviderWithDevtools from "./components/QueryClientProviderWithDevtools";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,9 @@ export default function RootLayout({
   return (
     <html data-theme="lemonade" lang="jp">
       <body className="bg-base-100 min-h-screen">
-        {children}
+        <QueryClientProviderWithDevtools>
+          {children}
+        </QueryClientProviderWithDevtools>
       </body>
     </html>
   );
