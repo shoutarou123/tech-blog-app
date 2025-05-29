@@ -17,6 +17,7 @@ const thumbnail =
     if(!res.ok) throw new Error('データ取得に失敗しました');
     return res.json();
   };
+  
 function Home() {
   const { data: postsData = [], isLoading, error } = useQuery({
     queryKey: ['posts'],

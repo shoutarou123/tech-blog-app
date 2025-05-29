@@ -3,7 +3,8 @@ export type Posts = {
   title: string,
   created_at: string,
   url: string,
-  thumbnail: string
+  thumbnail: string,
+  ogpImageUrl?: string,
 };
 
 export const defaultPost: Posts = {
