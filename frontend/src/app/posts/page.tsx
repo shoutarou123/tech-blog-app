@@ -1,32 +1,39 @@
-import { Posts } from "../../../types";
 import Link from "next/link";
 import Header from "../components/Header";
 import QiitaPostsPage from "../components/QiitaPostsPage";
 import { fetchOgpImage } from "../lib/fetchOgpImage";
-import Pagenation from "../components/Pagenation";
 
-type PageProps = {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
+// type PageProps = {
+//   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+// };
 const QiitaApi = process.env.NEXT_PUBLIC_QIITA_API_KEY;
-export default async function page({ searchParams }: PageProps) {
-  const resolvedSearchParams = await searchParams;
-  const currentPage = Number(resolvedSearchParams.p) || 1;
-  const limit = 4;
-  const path = "/posts";
+export default async function page() {
+  // const resolvedSearchParams = await searchParams;
+  // const currentPage = Number(resolvedSearchParams.p) || 1;
+  // const limit = 4;
+  // const path = "/posts";
   // const res = await fetch("/api/rails/postgres/");
   // const res = await fetch("http://localhost:3001/api/rails/qiita/all/", { cache: 'force-cache'});
-  // 全記事（公開+限定公開）取得
-  const resAuth = await fetch(`https://qiita.com/api/v2/authenticated_user/items?page=1&per_page=100`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${QiitaApi}`,
-    },
-  });
-  if (!resAuth.ok) {
-    throw new Error("データ取得に失敗しました");
-  }
-  const allItems: Posts[] = await resAuth.json();
+  const fetchPage = async(pageNum: number) => {
+    // 全記事（公開+限定公開）取得
+    const resAuth = await fetch(`https://qiita.com/api/v2/authenticated_user/items?page=${pageNum}&per_page=50`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${QiitaApi}`
+      },
+      next: { revalidate: 600},
+    });
+    if (!resAuth.ok) {
+      throw new Error("データ取得に失敗しました");
+    }
+    return await resAuth.json();
+  };
+
+  // fetchの1ﾍﾟｰｼﾞ目と2ページ目を取得
+  const [items1, items2] = await Promise.all([fetchPage(1), fetchPage(2)]);
+
+  // 合体
+  const allItems = [...items1, ...items2];
 
   // 公開記事だけ抽出
   const publicItems = allItems.filter(items => items.private === false)
@@ -38,19 +45,19 @@ export default async function page({ searchParams }: PageProps) {
   // if (!res.ok) throw new Error("全データ取得に失敗しました");
   // const allPostsData: Posts[] = await res.json();
 
-  const start = (currentPage - 1) * limit;
-  const end = start + limit;
-  const pageItems = publicItems.slice(start, end);
+  // const start = (currentPage - 1) * limit;
+  // const end = start + limit;
+  // const pageItems = publicItems.slice(start, end);
 
   // qiita画像取得
   const itemsWithOgp = await Promise.all(
-    pageItems.map(async (posts) => ({
+    publicItems.map(async (posts) => ({
       ...posts,
       ogpImageUrl: await fetchOgpImage(posts.url), // 取得処理関数にurlを渡す
     }))
   );
-  const count = publicItems.length;
-  console.log("publicItems値", publicItems);
+  // const count = publicItems.length;
+  // console.log("publicItems値", publicItems);
 
   return (
     <>
@@ -59,8 +66,7 @@ export default async function page({ searchParams }: PageProps) {
           戻る
         </Link>
       </Header>
-      <QiitaPostsPage itemsWithOgp={itemsWithOgp} />
-      <Pagenation currentPage={currentPage} limit={limit} count={count} path={path} />
+      <QiitaPostsPage allPosts={itemsWithOgp} limit={4} />
     </>
   );
 }
