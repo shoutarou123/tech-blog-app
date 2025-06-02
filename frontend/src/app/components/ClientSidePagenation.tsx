@@ -22,20 +22,20 @@ export default function ClientSidePagenation({ currentPage, totalPages, onPageCh
   }
 
   return (
-    <div className="join flex justify-center mx-auto">
-      <button className="join-item btn" onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
+    <div className="join flex justify-center mx-auto mt-4">
+      <button className="join-item btn btn-square" onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
         ＜
       </button>
       {pageNumbers.map((number) => (
         <button
           key={number}
           onClick={() => onPageChange(number)}
-          className={"join-item btn" + (currentPage === number ? "bg-indigo-500 text-white" : "")}>
+          className={"join-item btn btn-square" + (currentPage === number ? " text-white join-item btn btn-primary" : "")}>
           {number}
         </button>
       ))}
       <button
-        className="join-item btn"
+        className="join-item btn btn-square"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}>
         ＞
