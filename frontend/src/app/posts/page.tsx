@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import QiitaPostsPage from "../components/QiitaPostsPage";
 import { fetchOgpImage } from "../lib/fetchOgpImage";
 import { Posts } from "../../../types";
-import { preprocess } from "zod";
 
 // type PageProps = {
 //   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
