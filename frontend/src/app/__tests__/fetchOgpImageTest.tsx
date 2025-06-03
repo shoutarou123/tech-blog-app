@@ -15,7 +15,7 @@ describe("fetchOgpImage", () => {
     // fetchをモック
     global.fetch = jest.fn().mockResolvedValue({
       text: () => Promise.resolve(html),
-    } as any);
+    });
 
     const result = await fetchOgpImage("http://example.com");
     expect(result).toBe(ogImageUrl);
@@ -26,7 +26,7 @@ describe("fetchOgpImage", () => {
 
     global.fetch = jest.fn().mockResolvedValue({
       text: () => Promise.resolve(html),
-    } as any);
+    });
     const result = await fetchOgpImage("http://example.com");
     expect(result).toBe("");
   });

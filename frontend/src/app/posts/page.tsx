@@ -2,12 +2,13 @@ import Link from "next/link";
 import Header from "../components/Header";
 import QiitaPostsPage from "../components/QiitaPostsPage";
 import { fetchOgpImage } from "../lib/fetchOgpImage";
+import { Posts } from "../../../types";
 
 // type PageProps = {
 //   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 // };
 const QiitaApi = process.env.NEXT_PUBLIC_QIITA_API_KEY;
-export default async function page() {
+export default async function Page() {
   // const resolvedSearchParams = await searchParams;
   // const currentPage = Number(resolvedSearchParams.p) || 1;
   // const limit = 4;
@@ -26,7 +27,7 @@ export default async function page() {
     if (!resAuth.ok) {
       throw new Error("データ取得に失敗しました");
     }
-    return await resAuth.json();
+    return await (resAuth.json()) as Posts[];
   };
 
   // fetchの1ﾍﾟｰｼﾞ目と2ページ目を取得
