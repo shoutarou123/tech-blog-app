@@ -7,7 +7,6 @@ import { Posts } from "../../../types";
 // type PageProps = {
 //   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 // };
-const QiitaUrl = process.env.NEXT_PUBLIC_QIITA_URL;
 const QiitaApi = process.env.NEXT_PUBLIC_QIITA_API_KEY;
 export default async function Page() {
   // const resolvedSearchParams = await searchParams;
@@ -18,7 +17,7 @@ export default async function Page() {
   // const res = await fetch("http://localhost:3001/api/rails/qiita/all/", { cache: 'force-cache'});
   const fetchPage = async(pageNum: number) => {
     // 全記事（公開+限定公開）取得
-    const resAuth = await fetch(`${QiitaUrl}/api/v2/authenticated_user/items?page=${pageNum}&per_page=50`, {
+    const resAuth = await fetch(`https://qiita.com/api/v2/authenticated_user/items?page=${pageNum}&per_page=50`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${QiitaApi}`
