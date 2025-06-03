@@ -30,10 +30,10 @@ export default async function Page() {
     return await (resAuth.json()) as Posts[];
   };
 
-  console.time('Qiita fetch');
+  console.time('Qiita fetch1');
   // fetchの1ﾍﾟｰｼﾞ目と2ページ目を取得
   const [items1, items2] = await Promise.all([fetchPage(1), fetchPage(2)]);
-  console.time('Qiita fetch');
+  console.timeEnd('Qiita fetch1');
 
   // 合体
   const allItems = [...items1, ...items2];
@@ -51,7 +51,7 @@ export default async function Page() {
   // const start = (currentPage - 1) * limit;
   // const end = start + limit;
   // const pageItems = publicItems.slice(start, end);
-  console.time('Qiita fetch');
+  console.time('Qiita fetch2');
   // qiita画像取得
   const itemsWithOgp = await Promise.all(
     publicItems.map(async (posts) => ({
@@ -59,7 +59,7 @@ export default async function Page() {
       ogpImageUrl: await fetchOgpImage(posts.url), // 取得処理関数にurlを渡す
     }))
   );
-  console.time('Qiita fetch');
+  console.timeEnd('Qiita fetch2');
   // const count = publicItems.length;
   // console.log("publicItems値", publicItems);
 
