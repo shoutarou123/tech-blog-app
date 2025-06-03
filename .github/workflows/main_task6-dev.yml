@@ -15,6 +15,10 @@ jobs:
     permissions:
       contents: read #This is required for actions/checkout
 
+    env:
+      NEXT_PUBLIC_QIITA_URL: ${{ secrets.NEXT_PUBLIC_QIITA_URL }}
+      NEXT_PUBLIC_QIITA_API_KEY: ${{ secrets.NEXT_PUBLIC_QIITA_URL }}
+
     steps:
       - uses: actions/checkout@v4
 
