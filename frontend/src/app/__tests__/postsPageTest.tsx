@@ -1,9 +1,9 @@
-const mockQiitaPostsPage = jest.fn((props: any) => null);
+const mockQiitaPostsPage = jest.fn((_props) => null);
 // QiitaPostsPageのﾓｯｸ化 呼び出されたときに引数のpropsを受け取る 実際のｺﾝﾎﾟｰﾈﾝﾄではJSXを返しているがﾃｽﾄではどんなpropsが渡されたかを検証するためnullを返すようにする
 
 jest.mock("../components/QiitaPostsPage", () => ({
   __esModule: true,
-  default: (props: any) => mockQiitaPostsPage(props),
+  default: (props: Record<string, unknown>) => mockQiitaPostsPage(props),
   // default: でデフォルトエクスポートを上書きしています。
   // QiitaPostsPageコンポーネントが呼ばれた時、propsを受け取ってmockQiitaPostsPage(props)を呼ぶ
   // Jestのモック関数には、**呼び出された回数・引数・返り値などが自動的に記録される「.mockプロパティ」**が付く

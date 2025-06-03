@@ -13,6 +13,13 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   ...pluginQuery.configs["flat/recommended"],
+  {
+    files: ["**/*Test.tsx"],
+    rules: {
+      // _で始まる未使用引数は警告しない
+      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    },
+  },
 ];
 
 export default eslintConfig;
