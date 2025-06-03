@@ -7,7 +7,7 @@ import { fetchOgpImage } from "../lib/fetchOgpImage";
 //   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 // };
 const QiitaApi = process.env.NEXT_PUBLIC_QIITA_API_KEY;
-export default async function page() {
+export default async function Page() {
   // const resolvedSearchParams = await searchParams;
   // const currentPage = Number(resolvedSearchParams.p) || 1;
   // const limit = 4;

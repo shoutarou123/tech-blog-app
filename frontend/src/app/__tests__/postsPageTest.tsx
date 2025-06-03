@@ -15,6 +15,7 @@ jest.mock("../lib/fetchOgpImage", () => ({
 }));
 
 import { fetchOgpImage } from "../lib/fetchOgpImage";
+import Page from "../posts/page";
 import page from "../posts/page";
 import { render } from "@testing-library/react";
 
@@ -82,5 +83,19 @@ describe("page関数のテスト", () => {
         limit: 4,
       })
     );
+  });
+
+  it("fetchがrejectした際にエラーをthrowすること", async () => {
+    global.fetch = jest.fn().mockRejectedValue(new Error("データ取得に失敗しました"));
+    await expect(Page()).rejects.toThrow("データ取得に失敗しました");
+  });
+
+  it("fetchがok:falseの場合にエラーをthrowすること", async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: false,
+      status: 500,
+      json: async () => ({}),
+    });
+    await expect(Page()).rejects.toThrow("データ取得に失敗しました");
   });
 });
