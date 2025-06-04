@@ -22,7 +22,7 @@ export default function ClientSidePagenation({ currentPage, totalPages, onPageCh
   }
 
   return (
-    <div className="join flex justify-center mx-auto mt-4">
+    <div className="join">
       <button className="join-item btn btn-square" onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
         ＜
       </button>
