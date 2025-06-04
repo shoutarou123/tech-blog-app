@@ -1,7 +1,5 @@
 import Page from "../page";
 
-const mockPosts = [{ id: "1", title: "記事1", url: "https://test1" }];
-
 beforeEach(() => {
   global.fetch = jest.fn();
 });
