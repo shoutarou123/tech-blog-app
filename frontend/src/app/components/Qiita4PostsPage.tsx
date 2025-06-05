@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { Posts } from "../../../types";
 import { formattedDate } from "../utils/formattedDate";
 import { useQueryClient } from "@tanstack/react-query";
@@ -34,7 +34,7 @@ function Qiita4PostsPage({ itemsWithOgp }: { itemsWithOgp: Posts[] }) {
     md:grid-cols-2 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {itemsWithOgp.map((posts) => {
           return (
-            <Link href={posts.url} key={posts.id} className="card bg-base-100 w-96 shadow-lg">
+            <Link href={posts.url} key={posts.id} className="image-animation card bg-base-100 w-96 shadow-lg">
               <figure>
                 <Image src={thumbnail} alt="画像" width={400} height={300} priority={true} />
               </figure>
@@ -47,7 +47,9 @@ function Qiita4PostsPage({ itemsWithOgp }: { itemsWithOgp: Posts[] }) {
         })}
       </div>
       <div className="flex justify-end mt-4">
-        <Link href="/posts" className="btn btn-secondary mr-10 justify-end">
+        <Link
+          href="/posts"
+          className="btn mr-10 justify-end c-btn-slide px-6 py-2 font-bold text-[#292929] bg-[#BDC000] border border-[#BDC000] rounded">
           もっと見る
         </Link>
       </div>
