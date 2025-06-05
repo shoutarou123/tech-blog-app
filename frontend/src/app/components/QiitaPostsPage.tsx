@@ -56,9 +56,10 @@ function QiitaPostsPage({ limit }: Props) {
       <div className="grid justify-items-center md:grid-cols-2 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {pageItems.map((posts: Posts) => {
           return (
-            <Link href={posts.url} key={posts.id} className="card bg-base-100 w-96 shadow-lg">
+            <Link href={posts.url} key={posts.id} className="image-animation card bg-base-100 w-96 shadow-lg">
               <figure>
-                <Image src={thumbnail} alt="画像" width={400} height={300} priority={true} />
+                <Image
+                src={thumbnail} alt="画像" width={400} height={300} priority={true} />
               </figure>
               <div className="card-body bg-base-content/5">
                 <p>{formattedDate(posts.created_at)}</p>
@@ -76,7 +77,9 @@ function QiitaPostsPage({ limit }: Props) {
         </div>
 
         <div className="justify-self-end">
-          <Link href="/" className="text-white btn btn-primary mr-10">
+          <Link
+            href="/"
+            className="btn mr-10 c-btn-slide2 px-6 py-2 font-bold text-[#fff] bg-[#419400] border border-[#419400] rounded">
             戻る
           </Link>
         </div>
