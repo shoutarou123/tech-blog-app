@@ -30,4 +30,10 @@ describe("fetchOgpImage", () => {
     const result = await fetchOgpImage("http://example.com");
     expect(result).toBe("");
   });
+
+  it("fetchが失敗した場合は空文字を返すこと", async () => {
+    global.fetch = jest.fn().mockRejectedValue(new Error("fetch error"));
+    const result = await fetchOgpImage("http://example.com");
+    expect(result).toBe("");
+  });
 });

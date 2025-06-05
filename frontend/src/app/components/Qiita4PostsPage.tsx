@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { Posts } from "../../../types";
 import { formattedDate } from "../utils/formattedDate";
 import { useQueryClient } from "@tanstack/react-query";
