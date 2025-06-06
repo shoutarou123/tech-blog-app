@@ -1,22 +1,44 @@
 import React from "react";
-import { Posts } from "../../types";
+import { BlogResponse, Posts } from "../../types";
 import Header from "./components/Header";
 import { fetchOgpImage } from "./lib/fetchOgpImage";
 import Qiita4PostsPage from "./components/Qiita4PostsPage";
+import CmsBlogsPage from "./components/CmsBlogsPage";
+
+const CmsApiKey = process.env.NEXT_PUBLIC_CMS_API_KEY;
 
 async function Page() {
-
-  const fetchData = async ():Promise<Posts[]> => {
+  const fetchData = async (): Promise<Posts[]> => {
     // 未認証で4記事分取得
-    const res = await fetch(`https://qiita.com/api/v2/items?query=user:taurosuke&per_page=4`, { next: {revalidate: 600}});
+    const res = await fetch(`https://qiita.com/api/v2/items?query=user:taurosuke&per_page=4`, {
+      next: { revalidate: 600 },
+    });
 
-    if(!res.ok) {
+    if (!res.ok) {
       throw new Error("データ取得に失敗しました");
     }
     return await res.json();
-  }
+  };
 
-  // 記事データ取得
+  // CMSからデータ取得
+  const fetchCmsData = async (): Promise<BlogResponse> => {
+    const res = await fetch(`https://xigjaxd0bx.microcms.io/api/v1/blogs?offset=0&limit=4`, {
+      next: { revalidate: 600 },
+      headers: {
+        "X-MICROCMS-API-KEY": `${CmsApiKey}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if(!res.ok) throw new Error("データ取得に失敗しました");
+    console.log("res", res);
+    return await res.json();
+  };
+
+  // CMSデータ呼び出し
+  const cmsData = await fetchCmsData();
+  console.log("cmsData", cmsData);
+
+  // Qiita記事データ取得
   const fetchPosts = await fetchData();
 
   // qiita画像取得
@@ -31,6 +53,7 @@ async function Page() {
     <>
       <Header />
       <Qiita4PostsPage itemsWithOgp={itemsWithOgp} />
+      <CmsBlogsPage cmsData={cmsData} />
     </>
   );
 }
