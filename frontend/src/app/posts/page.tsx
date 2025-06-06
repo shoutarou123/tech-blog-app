@@ -6,7 +6,7 @@ export default async function Page() {
   return (
     <>
       <Header />
-      <QiitaPostsPage limit={4} />
+      <QiitaPostsPage limit={8} />
     </>
   );
 }
