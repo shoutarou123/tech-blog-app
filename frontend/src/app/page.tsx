@@ -3,9 +3,10 @@ import { BlogResponse, Posts } from "../../types";
 import Header from "./components/Header";
 import { fetchOgpImage } from "./lib/fetchOgpImage";
 import Qiita4PostsPage from "./components/Qiita4PostsPage";
-import CmsBlogsPage from "./components/CmsBlogsPage";
+import Cms4BlogsPage from "./components/Cms4BlogsPage";
 
 const CmsApiKey = process.env.NEXT_PUBLIC_CMS_API_KEY;
+const CmsUrl = process.env.NEXT_PUBLIC_CMS_URL;
 
 async function Page() {
   const fetchData = async (): Promise<Posts[]> => {
@@ -22,7 +23,7 @@ async function Page() {
 
   // CMSからデータ取得
   const fetchCmsData = async (): Promise<BlogResponse> => {
-    const res = await fetch(`https://xigjaxd0bx.microcms.io/api/v1/blogs?offset=0&limit=4`, {
+    const res = await fetch(`${CmsUrl}/api/v1/blogs?offset=0&limit=4`, {
       next: { revalidate: 600 },
       headers: {
         "X-MICROCMS-API-KEY": `${CmsApiKey}`,
@@ -30,7 +31,6 @@ async function Page() {
       },
     });
     if(!res.ok) throw new Error("データ取得に失敗しました");
-    console.log("res", res);
     return await res.json();
   };
 
@@ -53,7 +53,7 @@ async function Page() {
     <>
       <Header />
       <Qiita4PostsPage itemsWithOgp={itemsWithOgp} />
-      <CmsBlogsPage cmsData={cmsData} />
+      <Cms4BlogsPage cmsData={cmsData} />
     </>
   );
 }
