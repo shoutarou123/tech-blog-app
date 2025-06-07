@@ -1,6 +1,5 @@
 import Header from "@/app/components/Header";
 import React from "react";
-import { BlogResponse } from "../../../../types";
 
 const CmsUrl = process.env.NEXT_PUBLIC_CMS_URL;
 const CmsApiKey = process.env.NEXT_PUBLIC_CMS_API_KEY;
@@ -9,8 +8,15 @@ type Props = {
   id: string;
 };
 
+type Blog = {
+  id: string;
+  createAt: string;
+  content: string;
+  title: string;
+}
+
 async function Page({ params }: { params: Props }) {
-  const { id } = params;
+  const { id } = await params;
   if (!id) {
     return <div>User ID is required</div>
   }
@@ -22,14 +28,12 @@ async function Page({ params }: { params: Props }) {
       },
     });
     if (!res.ok) throw new Error("データ取得に失敗しました");
-    const detailBlogData: BlogResponse = await res.json();
-
+    const detailBlogData: Blog = await res.json();
+    console.log('detailBlogData', detailBlogData);
   return (
     <div>
       <Header />
-      {detailBlogData?.contents.map((blog) => {
-        return <div key={blog.id}>{blog.content}</div>;
-      })}
+      {detailBlogData.content}
     </div>
   );
 }

@@ -18,7 +18,7 @@ function PageClient({allBlogs}: {allBlogs: BlogResponse}) {
       <div className="grid justify-items-center md:grid-cols-2 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 2xl:grid-row-2">
         {allBlogs.contents.map((blogs) => {
           return (
-            <Link href="#" key={blogs.id} className="image-animation card bg-base-100 w-96 shadow-lg">
+            <Link href={`/blogs/${blogs.id}`} key={blogs.id} className="image-animation card bg-base-100 w-96 shadow-lg">
               <figure>
                 <Image src={CmsThumbnail} alt="画像" width={400} height={300} priority={true} />
               </figure>
