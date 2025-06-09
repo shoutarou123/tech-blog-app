@@ -51,6 +51,17 @@ function QiitaPostsPage({ limit }: Props) {
 
   return (
     <>
+      <div className="flex items-center justify-between mt-4 mb-4 ml-10">
+        <div className="qiita-heading text-xl font-bold">個人記事一覧</div>
+        <div>
+          <Link
+            href="/"
+            className="btn mr-10 c-btn-slide2 px-6 py-2 font-bold text-[#fff] bg-[#419400] border border-[#419400] rounded">
+            戻る
+          </Link>
+        </div>
+      </div>
+
       <div className="grid justify-items-center md:grid-cols-2 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 2xl:grid-row-2">
         {pageItems.map((posts: Posts) => {
           return (
@@ -71,14 +82,6 @@ function QiitaPostsPage({ limit }: Props) {
         <div></div>
         <div className="justify-self-center">
           <ClientSidePagenation currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-        </div>
-
-        <div className="justify-self-end">
-          <Link
-            href="/"
-            className="btn mr-10 c-btn-slide2 px-6 py-2 font-bold text-[#fff] bg-[#419400] border border-[#419400] rounded">
-            戻る
-          </Link>
         </div>
       </div>
     </>

@@ -52,8 +52,10 @@ async function Page() {
   return (
     <>
       <Header />
+      <div className="mx-2">
       <Qiita4PostsPage itemsWithOgp={itemsWithOgp} />
       <Cms4BlogsPage cmsData={cmsData} />
+      </div>
     </>
   );
 }

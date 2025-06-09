@@ -26,10 +26,21 @@ function Qiita4PostsPage({ itemsWithOgp }: { itemsWithOgp: Posts[] }) {
   }, [queryClient]);
 
   return (
-    <div>
+    <>
+      <div className="flex items-center justify-between mt-4 ml-10">
+        <div className="qiita-heading text-xl font-bold">個人記事</div>
+        <div>
+          <Link
+            href="/posts"
+            className="btn mr-10 justify-end c-btn-slide px-6 py-2 font-bold text-[#292929] bg-[#BDC000] border border-[#BDC000] rounded">
+            もっと見る
+          </Link>
+        </div>
+      </div>
+
       <div
         className="grid justify-items-center
-    md:grid-cols-2 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+    md:grid-cols-2 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mt-4">
         {itemsWithOgp.map((posts) => {
           return (
             <Link href={posts.url} key={posts.id} className="image-animation card bg-base-100 w-96 shadow-lg">
@@ -44,14 +55,7 @@ function Qiita4PostsPage({ itemsWithOgp }: { itemsWithOgp: Posts[] }) {
           );
         })}
       </div>
-      <div className="flex justify-end mt-4">
-        <Link
-          href="/posts"
-          className="btn mr-10 justify-end c-btn-slide px-6 py-2 font-bold text-[#292929] bg-[#BDC000] border border-[#BDC000] rounded">
-          もっと見る
-        </Link>
-      </div>
-    </div>
+    </>
   );
 }
 
