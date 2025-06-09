@@ -19,5 +19,8 @@ runConfig:
 
   # Grant access to secrets in Cloud Secret Manager.
   # See https://firebase.google.com/docs/app-hosting/configure#secret-parameters
-  # - variable: MY_SECRET
-  #   secret: mySecretRef
+  env:
+  - variable: NEXT_PUBLIC_CMS_API_KEY
+    secret: projects/132176856044/secrets/NEXT_PUBLIC_CMS_API_KEY/versions/1
+  - variable: NEXT_PUBLIC_CMS_URL
+    secret: projects/132176856044/secrets/NEXT_PUBLIC_CMS_URL/versions/1
