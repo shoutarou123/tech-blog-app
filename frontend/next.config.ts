@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: 'qiita-user-contents.imgix.net',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.microcms-assets.io',
+        pathname: '/**',
+      },
     ],
   },
 };
