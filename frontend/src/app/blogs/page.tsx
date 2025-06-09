@@ -3,15 +3,13 @@ import { BlogResponse } from "../../../types";
 
 import PageClient from "./page.client";
 
-const CmsUrl = process.env.NEXT_PUBLIC_CMS_URL;
-const CmsApiKey = process.env.NEXT_PUBLIC_CMS_API_KEY;
 
 async function page() {
   const fetchAllBlogsData = async (): Promise<BlogResponse> => {
-    const res = await fetch(`${CmsUrl}/api/v1/blogs`, {
+    const res = await fetch(`https://xigjaxd0bx.microcms.io/api/v1/blogs`, {
       next: { revalidate: 600 },
       headers: {
-        "X-MICROCMS-API-KEY": `${CmsApiKey}`,
+        "X-MICROCMS-API-KEY": process.env.CMS_API_KEY || "",
         "Content-Type": "application/json",
       },
     });
