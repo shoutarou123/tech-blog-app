@@ -2,9 +2,6 @@ import Header from "@/app/components/Header";
 import React from "react";
 import PageClient from "./page.client";
 
-const CmsUrl = process.env.NEXT_PUBLIC_CMS_URL;
-const CmsApiKey = process.env.NEXT_PUBLIC_CMS_API_KEY;
-
 type Props = {
   id: string;
 };
@@ -22,10 +19,10 @@ async function Page({ params }: { params: Promise<Props> }) {
   if (!id) {
     return <div>User ID is required</div>;
   }
-  const res = await fetch(`${CmsUrl}/api/v1/blogs/${id}`, {
+  const res = await fetch(`https://xigjaxd0bx.microcms.io/api/v1/blogs/${id}`, {
     cache: "no-store",
     headers: {
-      "X-MICROCMS-API-KEY": `${CmsApiKey}`,
+      "X-MICROCMS-API-KEY": process.env.CMS_API_KEY || "",
       "Content-Type": "application/json",
     },
   });

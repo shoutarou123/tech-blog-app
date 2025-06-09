@@ -20,14 +20,8 @@ runConfig:
   # Grant access to secrets in Cloud Secret Manager.
   # See https://firebase.google.com/docs/app-hosting/configure#secret-parameters
   env:
-  - variable: NEXT_PUBLIC_CMS_API_KEY
-    secret: projects/132176856044/secrets/NEXT_PUBLIC_CMS_API_KEY/versions/1
-    availability:
-      -   BUILD
-      -   RUNTIME
-
-  - variable: NEXT_PUBLIC_CMS_URL
-    secret: projects/132176856044/secrets/NEXT_PUBLIC_CMS_URL/versions/1
+  - variable: CMS_API_KEY
+    secret: projects/132176856044/secrets/CMS_API_KEY/versions/1
     availability:
       -   BUILD
       -   RUNTIME
