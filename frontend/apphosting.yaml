@@ -22,5 +22,12 @@ runConfig:
   env:
   - variable: NEXT_PUBLIC_CMS_API_KEY
     secret: projects/132176856044/secrets/NEXT_PUBLIC_CMS_API_KEY/versions/1
+    availability:
+      -   BUILD
+      -   RUNTIME
+
   - variable: NEXT_PUBLIC_CMS_URL
     secret: projects/132176856044/secrets/NEXT_PUBLIC_CMS_URL/versions/1
+    availability:
+      -   BUILD
+      -   RUNTIME
