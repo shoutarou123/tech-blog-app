@@ -1,12 +1,13 @@
 "use client";
 
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
-import { Posts } from "../../../types";
-import { formattedDate } from "../utils/formattedDate";
+
 import { useQueryClient } from "@tanstack/react-query";
-import { QiitaThumbnail } from "./QiitaThumbnail";
+import { Posts } from "../../../../types";
+import { QiitaThumbnail } from "../QiitaThumbnail";
+import { formattedDate } from "@/app/utils/formattedDate";
 
 const fetchAllPosts = async () => {
   const res = await fetch("https://qiita.com/api/v2/items?query=user:taurosuke&per_page=100");

@@ -1,12 +1,12 @@
 import Header from "../components/Header";
-import QiitaPostsPage from "../components/QiitaPostsPage";
+import PageClient from "./page.client";
 
 export default async function Page() {
   return (
     <>
       <Header />
       <div className="mb-2">
-        <QiitaPostsPage limit={8} />
+        <PageClient limit={8} />
       </div>
     </>
   );
