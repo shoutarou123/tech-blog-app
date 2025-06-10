@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
+
 import { CmsThumbnail } from "@/app/components/CmsThumbnail";
 import { formattedDate } from "@/app/utils/formattedDate";
-import Image from "next/image";
-import Link from "next/link";
 
 type Blog = {
   id: string;

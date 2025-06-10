@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { BlogResponse } from "../../../types";
 import Link from "next/link";
 import Image from "next/image";
+
+import { BlogResponse } from "../../../types";
 import { CmsThumbnail } from "../components/CmsThumbnail";
 import { formattedDate } from "../utils/formattedDate";
-import CmsClientSidePagenation from "../components/CmsClientSidePagenation";
+import CmsClientSidePagenation from "../components/pagenation/CmsClientSidePagenation";
 
 const limit = 8;
 

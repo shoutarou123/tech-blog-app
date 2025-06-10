@@ -1,9 +1,8 @@
-import React from "react";
 import { BlogResponse, Posts } from "../../types";
 import Header from "./components/Header";
 import { fetchOgpImage } from "./lib/fetchOgpImage";
-import Qiita4PostsPage from "./components/Qiita4PostsPage";
-import Cms4BlogsPage from "./components/Cms4BlogsPage";
+import Cms4BlogsPage from "./components/4Posts-4BlogsPage/Cms4BlogsPage";
+import Qiita4PostsPage from "./components/4Posts-4BlogsPage/Qiita4PostsPage";
 
 async function Page() {
   const fetchData = async (): Promise<Posts[]> => {
@@ -27,7 +26,7 @@ async function Page() {
         "Content-Type": "application/json",
       },
     });
-    if(!res.ok) throw new Error("データ取得に失敗しました");
+    if (!res.ok) throw new Error("データ取得に失敗しました");
     return await res.json();
   };
 
@@ -50,8 +49,8 @@ async function Page() {
     <>
       <Header />
       <div className="mx-2">
-      <Qiita4PostsPage itemsWithOgp={itemsWithOgp} />
-      <Cms4BlogsPage cmsData={cmsData} />
+        <Qiita4PostsPage itemsWithOgp={itemsWithOgp} />
+        <Cms4BlogsPage cmsData={cmsData} />
       </div>
     </>
   );

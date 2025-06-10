@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { Posts } from "../../../types";
 import Link from "next/link";
 import Image from "next/image";
-import { formattedDate } from "../utils/formattedDate";
-import ClientSidePagenation from "./ClientSidePagenation";
+
 import { useQuery } from "@tanstack/react-query";
-import { QiitaThumbnail } from "./QiitaThumbnail";
+import { Posts } from "../../../types";
+import { formattedDate } from "../utils/formattedDate";
+import { QiitaThumbnail } from "../components/QiitaThumbnail";
+import ClientSidePagenation from "../components/pagenation/QiitaClientSidePagenation";
 
 type Props = {
   limit: number;
@@ -19,7 +20,7 @@ const fetchAllData = async (): Promise<Posts[]> => {
   return res.json();
 };
 
-function QiitaPostsPage({ limit }: Props) {
+function PageClient({ limit }: Props) {
   const {
     data: postsData = [],
     isLoading,
@@ -88,4 +89,4 @@ function QiitaPostsPage({ limit }: Props) {
   );
 }
 
-export default QiitaPostsPage;
+export default PageClient;

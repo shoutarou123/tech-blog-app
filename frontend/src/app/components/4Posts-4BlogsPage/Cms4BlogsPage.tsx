@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
-import { BlogResponse } from "../../../types";
-import { formattedDate } from "../utils/formattedDate";
 import Image from "next/image";
 import Link from "next/link";
-import { CmsThumbnail } from "./CmsThumbnail";
+
+import { BlogResponse } from "../../../../types";
+import { formattedDate } from "../../utils/formattedDate";
+import { CmsThumbnail } from "../CmsThumbnail";
 
 function Cms4BlogsPage({ cmsData }: { cmsData: BlogResponse }) {
   return (
