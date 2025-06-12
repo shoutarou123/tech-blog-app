@@ -14,7 +14,7 @@ type Props = {
   limit: number;
 };
 
-const fetchAllData = async (): Promise<Posts[]> => {
+export const fetchAllData = async (): Promise<Posts[]> => {
   const res = await fetch("http://qiita.com/api/v2/items?query=user:taurosuke&per_page=100");
   if (!res.ok) throw new Error(`データ取得に失敗しました ${res.statusText}`);
   return res.json();
