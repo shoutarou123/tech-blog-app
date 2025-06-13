@@ -14,10 +14,10 @@ type Props = {
   limit: number;
 };
 
-const fetchAllData = async (): Promise<Posts[]> => {
+export const fetchAllData = async (): Promise<Posts[]> => {
   const res = await fetch("http://qiita.com/api/v2/items?query=user:taurosuke&per_page=100");
   if (!res.ok) throw new Error(`データ取得に失敗しました ${res.statusText}`);
-  return res.json();
+  return res.json() as Promise<Posts[]>;
 };
 
 function PageClient({ limit }: Props) {
@@ -47,8 +47,12 @@ function PageClient({ limit }: Props) {
     [postsData, currentPage, limit]
   );
 
-  if (!isLoading) <div>Loading...</div>;
-  if (error) <div>エラーが発生しました</div>;
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>エラーが発生しました</div>;
+  }
 
   return (
     <>

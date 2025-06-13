@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
-import Qiita4PostsPage from "../components/Qiita4PostsPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Qiita4PostsPage from "../components/4Posts-4BlogsPage/Qiita4PostsPage";
 
 describe("Qiita4PostsPage", () => {
   it("fetchAllPostsが呼ばれること", async () => {

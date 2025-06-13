@@ -32,7 +32,6 @@ async function Page() {
 
   // CMSデータ呼び出し
   const cmsData = await fetchCmsData();
-  console.log("cmsData", cmsData);
 
   // Qiita記事データ取得
   const fetchPosts = await fetchData();

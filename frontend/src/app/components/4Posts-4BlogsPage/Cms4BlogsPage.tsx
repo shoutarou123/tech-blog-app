@@ -12,10 +12,11 @@ function Cms4BlogsPage({ cmsData }: { cmsData: BlogResponse }) {
   return (
     <>
       <div className="flex items-center justify-between mt-4 ml-10">
-        <div className="cms-heading text-xl font-bold">ブログ記事</div>
+        <div data-testid="title" className="cms-heading text-xl font-bold">ブログ記事</div>
         <div>
           <Link
             href="blogs"
+            data-testid="button"
             className="btn mr-10 justify-end c-btn-slide3 px-6 py-2 font-bold text-[#292929] bg-[#B1D9E9] border border-[#B1D9E9] rounded">
             もっと見る
           </Link>
