@@ -1,10 +1,17 @@
 import { getCloneableBody } from "next/dist/server/body-streams";
 import PageClient, { fetchAllData } from "../posts/page.client";
+import { useQuery } from "@tanstack/react-query";
+import { render, screen } from "@testing-library/react";
+import { Posts } from "../../../types";
 
 // jest.mock("../posts/page.client", () => ({
 //   ...jest.requireActual("../posts/page.client"),
 //   fetchAllData: jest.fn(),
 // }));
+
+jest.mock("@tanstack/react-query", () => ({
+  useQuery: jest.fn(),
+}));
 
 describe("postsPage", () => {
   it("!res.okの場合にErrorをthrowすること", async () => {
@@ -35,5 +42,47 @@ describe("postsPage", () => {
     // (fetchAllData as jest.Mock).mockResolvedValue(mockData);
     const result = await fetchAllData();
     expect(result).toEqual(mockData);
+  });
+
+  it("ローディング中はLoading...が表示されること", async () => {
+    (useQuery as jest.Mock).mockReturnValue({
+      data: undefined,
+      isLoading: true,
+      error: null,
+    });
+    render(<PageClient limit={4} />);
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
+  });
+
+  it("useQueryでエラーが発生した際はエラーが発生しましたが表示されること", async () => {
+    (useQuery as jest.Mock).mockReturnValue({
+      data: undefined,
+      isLoading: false,
+      error: true,
+    });
+    render(<PageClient limit={4} />);
+    expect(screen.getByText("エラーが発生しました")).toBeInTheDocument();
+  });
+
+  it("個人記事一覧が表示されていること、戻るのlinkタグが存在していること", async () => {
+    const mockData: Posts[] = [
+      {
+        id: 1,
+        title: "testtitle",
+        created_at: "20251111",
+        url: "test@test.com",
+        thumbnail: "testthumbnail",
+        private: false,
+      },
+    ];
+
+    (useQuery as jest.Mock).mockReturnValue({
+      data: mockData,
+      isLoading: false,
+      error: null,
+    });
+    render(<PageClient limit={4} />);
+    expect(screen.getByText("個人記事一覧")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "戻る"})).toBeInTheDocument();
   });
 });

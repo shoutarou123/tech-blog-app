@@ -47,8 +47,12 @@ function PageClient({ limit }: Props) {
     [postsData, currentPage, limit]
   );
 
-  if (!isLoading) <div>Loading...</div>;
-  if (error) <div>エラーが発生しました</div>;
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>エラーが発生しました</div>;
+  }
 
   return (
     <>
