@@ -1,9 +1,12 @@
-import { getCloneableBody } from "next/dist/server/body-streams";
 import PageClient, { fetchAllData } from "../posts/page.client";
 import { useQuery } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
 import { Posts } from "../../../types";
 import { debug } from "console";
+import userEvent from "@testing-library/user-event";
+import { useRouter } from "next/navigation";
+import { Router } from "next/router";
+import Link from "next/link";
 
 // jest.mock("../posts/page.client", () => ({
 //   ...jest.requireActual("../posts/page.client"),
@@ -65,7 +68,7 @@ describe("postsPage", () => {
     expect(screen.getByText("エラーが発生しました")).toBeInTheDocument();
   });
 
-  it("個人記事一覧が表示されていること、戻るのlinkタグが存在していること、テストタイトルが表示されていること、1995年12月17日03:24:00が表示されていること", async () => {
+  it("個人記事一覧が表示されていること、戻るのlinkタグが存在していること、テストタイトルが表示されていること、1995年12月17日03:24:00が表示されていること、戻るボタンを押すと'/'が呼ばれること", async () => {
     const mockData: Posts[] = [
       {
         id: 1,
@@ -82,14 +85,15 @@ describe("postsPage", () => {
       isLoading: false,
       error: null,
     });
+    const user = userEvent.setup();
     render(<PageClient limit={4} />);
     expect(screen.getByText("個人記事一覧")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "戻る"})).toBeInTheDocument();
+    const backButton = screen.getByRole("link", { name: "戻る" });
+    expect(backButton).toBeInTheDocument();
     expect(screen.getByText("テストタイトル")).toBeInTheDocument();
     expect(screen.getByText("1995年12月17日03:24:00")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "1"})).toBeInTheDocument();
+    await user.click(backButton);
+    expect(backButton).toHaveAttribute("href","/");
     screen.debug();
   });
-
-
 });
