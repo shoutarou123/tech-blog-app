@@ -8,12 +8,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Posts } from "../../../../types";
 import { QiitaThumbnail } from "../QiitaThumbnail";
 import { formattedDate } from "@/app/utils/formattedDate";
-
-const fetchAllPosts = async () => {
-  const res = await fetch("https://qiita.com/api/v2/items?query=user:taurosuke&per_page=100");
-  if (!res) throw new Error(`データ取得に失敗しました`);
-  return await res.json();
-};
+import { fetchAllPosts } from "@/app/api/nextjs/qiita/api";
 
 function Qiita4PostsPage({ itemsWithOgp }: { itemsWithOgp: Posts[] }) {
   const queryClient = useQueryClient();

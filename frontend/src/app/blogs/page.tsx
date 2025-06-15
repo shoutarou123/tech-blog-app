@@ -4,7 +4,7 @@ import { BlogResponse } from "../../../types";
 import PageClient from "./page.client";
 
 
-async function page() {
+async function Page() {
   const fetchAllBlogsData = async (): Promise<BlogResponse> => {
     const res = await fetch(`https://xigjaxd0bx.microcms.io/api/v1/blogs`, {
       next: { revalidate: 600 },
@@ -26,4 +26,4 @@ async function page() {
   );
 }
 
-export default page;
+export default Page;

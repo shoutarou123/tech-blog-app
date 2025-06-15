@@ -26,7 +26,7 @@ function Cms4BlogsPage({ cmsData }: { cmsData: BlogResponse }) {
       <div
         className="grid justify-items-center
     md:grid-cols-2 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mt-4">
-        {cmsData.contents.map((blogs) => {
+        {cmsData.contents?.map((blogs) => {
           return (
             <Link
               href={`/blogs/${blogs.id}`}
