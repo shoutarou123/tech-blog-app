@@ -9,6 +9,7 @@ jest.mock("@tanstack/react-query", () => ({
 }));
 
 describe("postsPage", () => {
+
   it("!res.okの場合にErrorをthrowすること", async () => {
     global.fetch = jest.fn((url) => {
       if (url.toString().includes("qiita.com")) {

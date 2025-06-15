@@ -145,4 +145,42 @@ describe("Page", () => {
     const page = await Page();
     render(<QueryClientProvider client={queryClient}>{page}</QueryClientProvider>);
   });
+
+  it("X-MICROCMS-API-KEYがundefinedでもエラーを返さないこと", async () => {
+    delete process.env.CMS_API_KEY;
+    const mockData = {
+      contens: [{}],
+    };
+    const qiitaMockData = [{}];
+    global.fetch = jest.fn((url, init) => {
+      if (url.toString().includes("microcms.io")) {
+        expect(init.headers).toBeDefined();
+        expect(init.headers["X-MICROCMS-API-KEY"]).toBe("");
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: () => Promise.resolve(mockData),
+        } as Response);
+      } else if (url.toString().includes("qiita.com")) {
+        return Promise.resolve(
+          new Response(
+            JSON.stringify([
+              {
+                id: 1,
+                title: "テストタイトル",
+                created_at: "20251111",
+                url: "test@test.com",
+                thumbnail: "test_image",
+                private: false,
+              },
+            ]),
+            { status: 200, statusText: "OK" }
+          )
+        );
+      }
+    }) as jest.Mock;
+    const queryClient = new QueryClient();
+    const page = await Page();
+    render(<QueryClientProvider client={queryClient}>{page}</QueryClientProvider>);
+  });
 });

@@ -14,7 +14,6 @@ type Blog = {
 
 async function Page({ params }: { params: Promise<Props> }) {
   const { id } = await params;
-  console.log("params:", params);
   if (!id) {
     return <div>User ID is required</div>;
   }
@@ -27,8 +26,6 @@ async function Page({ params }: { params: Promise<Props> }) {
   });
   if (!res.ok) throw new Error("データ取得に失敗しました");
   const detailBlogData: Blog = await res.json();
-  console.log("detailBlogData:", detailBlogData);
-  console.log("detailBlogData.createdAt:", detailBlogData.createdAt);
 
   // const $ = cheerio.load(detailBlogData.content);
   // console.log('$:', $);
