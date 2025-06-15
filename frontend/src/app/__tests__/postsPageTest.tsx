@@ -2,16 +2,7 @@ import PageClient, { fetchAllData } from "../posts/page.client";
 import { useQuery } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
 import { Posts } from "../../../types";
-import { debug } from "console";
 import userEvent from "@testing-library/user-event";
-import { useRouter } from "next/navigation";
-import { Router } from "next/router";
-import Link from "next/link";
-
-// jest.mock("../posts/page.client", () => ({
-//   ...jest.requireActual("../posts/page.client"),
-//   fetchAllData: jest.fn(),
-// }));
 
 jest.mock("@tanstack/react-query", () => ({
   useQuery: jest.fn(),
@@ -28,7 +19,6 @@ describe("postsPage", () => {
         } as Response);
       }
     }) as jest.Mock;
-    // (fetchAllData as jest.Mock).mockRejectedValue(new Error("データ取得に失敗しました"));
     await expect(fetchAllData()).rejects.toThrow("データ取得に失敗しました");
   });
 
@@ -43,7 +33,6 @@ describe("postsPage", () => {
         } as Response);
       }
     }) as jest.Mock;
-    // (fetchAllData as jest.Mock).mockResolvedValue(mockData);
     const result = await fetchAllData();
     expect(result).toEqual(mockData);
   });
@@ -94,6 +83,5 @@ describe("postsPage", () => {
     expect(screen.getByText("1995年12月17日03:24:00")).toBeInTheDocument();
     await user.click(backButton);
     expect(backButton).toHaveAttribute("href","/");
-    screen.debug();
   });
 });

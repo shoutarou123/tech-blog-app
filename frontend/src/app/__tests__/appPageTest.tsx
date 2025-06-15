@@ -1,3 +1,4 @@
+/* eslint-disable */
 const { Response } = require("node-fetch");
 import { render, screen } from "@testing-library/react";
 import Page from "../page";
