@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Posts } from "../../../types";
 import { formattedDate } from "../utils/formattedDate";
 import { QiitaThumbnail } from "../components/QiitaThumbnail";
-import ClientSidePagenation from "../components/pagenation/QiitaClientSidePagenation";
+import QiitaClientSidePagenation from "../components/pagenation/QiitaClientSidePagenation";
 
 type Props = {
   limit: number;
@@ -86,7 +86,7 @@ function PageClient({ limit }: Props) {
       <div className="grid grid-cols-3 items-center mt-4">
         <div></div>
         <div className="justify-self-center">
-          <ClientSidePagenation currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+          <QiitaClientSidePagenation currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
         </div>
       </div>
     </>

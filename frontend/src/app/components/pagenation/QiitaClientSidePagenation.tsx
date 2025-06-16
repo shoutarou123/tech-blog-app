@@ -6,7 +6,7 @@ type Props = {
   onPageChange: (page: number) => void;
 };
 
-export default function ClientSidePagenation({ currentPage, totalPages, onPageChange }: Props) {
+export default function QiitaClientSidePagenation({ currentPage, totalPages, onPageChange }: Props) {
   let startPage = Math.max(1, currentPage - 2);
   let endPage = Math.min(totalPages, currentPage + 2);
 
