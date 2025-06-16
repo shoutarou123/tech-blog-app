@@ -58,6 +58,5 @@ describe("Qiita4PostsPage", () => {
     const showPostsButton = screen.getByRole("link", { name: "もっと見る" });
     await user.click(showPostsButton);
     expect(showPostsButton).toHaveAttribute("href", "/posts");
-    screen.debug();
   });
 });
