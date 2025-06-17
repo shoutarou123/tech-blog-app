@@ -59,4 +59,14 @@ describe("Qiita4PostsPage", () => {
     await user.click(showPostsButton);
     expect(showPostsButton).toHaveAttribute("href", "/posts");
   });
+
+  it("console.errorが呼ばれていること", async () => {
+    global.fetch = jest.fn(() => {
+      return Promise.reject(new Error("ネットワークエラー"))
+    }) as jest.Mock;
+    const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+    await expect(fetchAllPosts()).rejects.toThrow("ネットワークエラー");
+    expect(spy).toHaveBeenCalledWith("ネットワークエラー");
+    spy.mockReset();
+  });
 });

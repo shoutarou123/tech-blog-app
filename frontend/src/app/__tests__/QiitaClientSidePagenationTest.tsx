@@ -11,7 +11,7 @@ describe("QiitaClientSidePagenation", () => {
   });
 
   it("現在のページがトータルページ-2よりも大きい場合にもページネーションが表示されていること", async () => {
-    render(<QiitaClientSidePagenation currentPage={4} totalPages={5} onPageChange={function () {}} />);
+    render(<QiitaClientSidePagenation currentPage={3} totalPages={4} onPageChange={function () {}} />);
     expect(screen.getByRole("button", { name: "2" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "＜" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "＞" })).toBeInTheDocument();
