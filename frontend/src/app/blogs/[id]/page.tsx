@@ -17,15 +17,23 @@ async function Page({ params }: { params: Promise<Props> }) {
   if (!id) {
     return <div>User ID is required</div>;
   }
-  const res = await fetch(`https://xigjaxd0bx.microcms.io/api/v1/blogs/${id}`, {
-    cache: "no-store",
-    headers: {
-      "X-MICROCMS-API-KEY": process.env.CMS_API_KEY || "",
-      "Content-Type": "application/json",
-    },
-  });
-  if (!res.ok) throw new Error("データ取得に失敗しました");
-  const detailBlogData: Blog = await res.json();
+  const fetchBlogData = async ():Promise<Blog> => {
+    try {
+      const res = await fetch(`https://xigjaxd0bx.microcms.io/api/v1/blogs/${id}`, {
+        cache: "no-store",
+        headers: {
+          "X-MICROCMS-API-KEY": process.env.CMS_API_KEY || "",
+          "Content-Type": "application/json",
+        },
+      });
+      if (!res.ok) throw new Error("ブログデータ取得に失敗しました");
+      return await res.json();
+    } catch (error) {
+      console.error("エラーをcatch", error);
+      throw error;
+    }
+  }
+  const detailBlogData = await fetchBlogData();
 
   // const $ = cheerio.load(detailBlogData.content);
   // console.log('$:', $);
