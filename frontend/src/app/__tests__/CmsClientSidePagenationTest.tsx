@@ -51,7 +51,6 @@ describe("CmsClientSidePagenation", () => {
 
     rerender(<CmsClientSidePagenation currentPage={currentPage} totalPages={15} onPageChange={onPageChange} />);
     expect(screen.getByRole("button", { name: "7" })).toBeInTheDocument();
-    screen.debug();
   });
 
   it("＜を押すと", async () => {
