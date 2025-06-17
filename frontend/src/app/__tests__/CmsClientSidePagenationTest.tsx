@@ -11,7 +11,7 @@ describe("CmsClientSidePagenation", () => {
   });
 
   it("現在のページがトータルページ-2よりも大きい場合にもページネーションが表示されていること", async () => {
-    render(<CmsClientSidePagenation currentPage={4} totalPages={5} onPageChange={function () {}} />);
+    render(<CmsClientSidePagenation currentPage={3} totalPages={4} onPageChange={function () {}} />);
     expect(screen.getByRole("button", { name: "2" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "＜" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "＞" })).toBeInTheDocument();
