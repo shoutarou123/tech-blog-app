@@ -32,11 +32,15 @@ async function Page() {
           "Content-Type": "application/json",
         },
       });
+      console.log("API_KEY", process.env.CMS_API_KEY?.slice(0,4) + "***");
+      console.log("res.status:", res.status);
       if (!res.ok) throw new Error("CMS: データ取得に失敗しました");
       return await res.json();
     } catch (error) {
-      console.error("errorをcatch", error);
-      throw new Error("CMS: データ取得に失敗しました");
+      if (error instanceof Error) {
+        console.error("errorをcatch", error);
+      }
+        throw new Error("CMS: データ取得に失敗しました" + error);
     }
   };
 

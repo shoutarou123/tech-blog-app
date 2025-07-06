@@ -26,8 +26,12 @@ async function Page({ params }: { params: Promise<Props> }) {
           "Content-Type": "application/json",
         },
       });
+      console.log("API_KEY", process.env.CMS_API_KEY?.slice(0,4) + "***");
+      console.log("res.status:", res.status);
       if (!res.ok) throw new Error("ブログデータ取得に失敗しました");
-      return await res.json();
+      const data = await res.json();
+      console.log("data:", data);
+      return data;
     } catch (error) {
       console.error("エラーをcatch", error);
       throw error;

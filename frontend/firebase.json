@@ -1,7 +1,7 @@
 {
   "apphosting": {
     "backendId": "tech-blog",
-    "rootDir": "/frontend",
+    "rootDir": ".",
     "ignore": [
       "node_modules",
       ".git",

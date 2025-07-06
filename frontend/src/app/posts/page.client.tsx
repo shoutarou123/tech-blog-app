@@ -39,13 +39,29 @@ function PageClient({ limit }: Props) {
   //   }))
   // );
 
+  const [searchWord, setSearchWord] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(postsData.length / limit);
+
+  // const totalPages = Math.ceil(postsData.length / limit);
+
+  const filteredPosts = useMemo(
+    () => postsData.filter((post) => post.title.toLowerCase().includes(searchWord.toLowerCase())),
+    [postsData, searchWord]
+  );
+
+  const totalPages = Math.ceil(filteredPosts.length / limit);
 
   const pageItems = useMemo(
-    () => postsData.slice((currentPage - 1) * limit, currentPage * limit),
-    [postsData, currentPage, limit]
+    () => filteredPosts.slice((currentPage - 1) * limit, currentPage * limit),
+    [filteredPosts, currentPage, limit]
   );
+
+  // const pageItems = useMemo(
+  //   () => postsData.slice((currentPage - 1) * limit, currentPage * limit),
+  //   [postsData, currentPage, limit]
+  // );
+
+  console.log(pageItems);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -58,6 +74,18 @@ function PageClient({ limit }: Props) {
     <>
       <div className="flex items-center justify-between mt-4 mb-4 ml-10">
         <div className="qiita-heading text-xl font-bold">個人記事一覧</div>
+        <div>
+          <label className="font-bold mr-2">検索</label>
+          <input
+            className="border rounded-md bg-white p-2"
+            placeholder="　検索タイトルを入力..."
+            value={searchWord}
+            onChange={(e) => {
+              setSearchWord(e.target.value);
+              setCurrentPage(1);
+            }}
+          />
+        </div>
         <div>
           <Link
             href="/"
